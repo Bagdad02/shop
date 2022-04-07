@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -39,6 +39,7 @@ class LoginApiView(ObtainAuthToken):
 
 
 class LogoutView(APIView):
+    # permission_classes = [AllowAny]
     def post(self, request):
         try:
             user = request.user
