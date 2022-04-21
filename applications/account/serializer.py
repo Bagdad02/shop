@@ -36,7 +36,7 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     password = serializers.CharField(required=True)
 
-    def validate_email(self,email):
+    def validate_email(self, email):
         if not User.objects.filter(email=email).exists():
             raise serializers.ValidationError('пользователь не зарегистрирв')
         return email
@@ -58,7 +58,7 @@ class LoginSerializer(serializers.Serializer):
         password = serializers.CharField(required=True,min_length=6)
         password_confirm = serializers.CharField(required=True,min_length=6)
 
-        def validate_old_password(self,old_password):
+        def validate_old_password(self, old_password):
             user = self.context.get('request').user
             if not user.checkpassword(old_password):
                 raise serializers.ValidationError('неверный пароль')
